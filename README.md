@@ -1,42 +1,42 @@
-## Example Monitoring In Ratatui
+## Example Monitoring Ratatui
 
-### Project Overview
+### Ringkasan Proyek
 
-This project is a terminal-based monitoring tool (TUI) written in Rust using the `ratatui` library. This application provides an interface for monitoring:
+Proyek ini adalah alat pemantauan berbasis terminal (TUI) yang ditulis dalam bahasa Rust menggunakan pustaka `ratatui`. Aplikasi ini menyediakan antarmuka untuk memantau:
 
-*   **System:** CPU usage, RAM, network traffic, system load, and uptime.
-*   **Docker:** Displays a list of Docker containers and images, their status, and allows basic management (start, stop, restart, delete). There is also a feature to create new containers.
-*   **Kubernetes:** Displays a list of Kubernetes pods along with their status, and allows for deleting pods.
+*   **Sistem:** Penggunaan CPU, RAM, lalu lintas jaringan, beban sistem, dan waktu aktif.
+*   **Docker:** Menampilkan daftar kontainer dan gambar Docker, statusnya, dan memungkinkan manajemen dasar (memulai, menghentikan, memulai ulang, menghapus). Ada juga fitur untuk membuat kontainer baru.
+*   **Kubernetes:** Menampilkan daftar pod Kubernetes beserta statusnya, dan memungkinkan untuk menghapus pod.
 
-### Architecture
+### Arsitektur
 
-This application is a single binary that uses several libraries to retrieve and display information:
+Aplikasi ini adalah biner tunggal yang menggunakan beberapa pustaka untuk mengambil dan menampilkan informasi:
 
-*   `ratatui`: To build the text-based user interface (TUI).
-*   `crossterm`: As a backend for `ratatui` to control the terminal.
-*   `sysinfo`: To get system information such as CPU, memory, and network statistics.
-*   `chrono`: For time-related operations.
-*   This application runs `docker` and `kubectl` commands in the shell to get information from Docker and Kubernetes.
+*   `ratatui`: Untuk membangun antarmuka pengguna berbasis teks (TUI).
+*   `crossterm`: Sebagai backend untuk `ratatui` untuk mengontrol terminal.
+*   `sysinfo`: Untuk mendapatkan informasi sistem seperti CPU, memori, dan statistik jaringan.
+*   `chrono`: Untuk operasi terkait waktu.
+*   Aplikasi ini menjalankan perintah `docker` dan `kubectl` di shell untuk mendapatkan informasi dari Docker dan Kubernetes.
 
-Here is the architecture diagram using Mermaid.js:
+Berikut adalah diagram arsitektur menggunakan Mermaid.js:
 
 ```mermaid
 graph TD
-    subgraph User Interface TUI
-        A[main.rs] -- uses --> B(ratatui);
-        B -- uses --> C(crossterm);
+    subgraph Antarmuka Pengguna TUI
+        A[main.rs] -- menggunakan --> B(ratatui);
+        B -- menggunakan --> C(crossterm);
     end
 
-    subgraph Data Sources
-        A -- uses --> D(sysinfo);
-        A -- runs --> E(Docker CLI);
-        A -- runs --> F(Kubernetes CLI);
+    subgraph Sumber Data
+        A -- menggunakan --> D(sysinfo);
+        A -- menjalankan --> E(Docker CLI);
+        A -- menjalankan --> F(Kubernetes CLI);
     end
 
-    subgraph Features
-        G[System Monitoring]
-        H[Docker Management]
-        I[Kubernetes Pods]
+    subgraph Fitur
+        G[Pemantauan Sistem]
+        H[Manajemen Docker]
+        I[Pod Kubernetes]
     end
 
     A --> G;
@@ -48,30 +48,30 @@ graph TD
     F --> I;
 ```
 
-### How to Run Locally
+### Cara Menjalankan Secara Lokal
 
-1.  **Prerequisites:**
-    *   Install Rust: [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install)
-    *   Install Docker (optional, for Docker monitoring): [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
-    *   Install kubectl (optional, for Kubernetes monitoring): [https://kubernetes.io/docs/tasks/tools/](https://kubernetes.io/docs/tasks/tools/)
+1.  **Prasyarat:**
+    *   Instal Rust: [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install)
+    *   Instal Docker (opsional, untuk pemantauan Docker): [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+    *   Instal kubectl (opsional, untuk pemantauan Kubernetes): [https://kubernetes.io/docs/tasks/tools/](https://kubernetes.io/docs/tasks/tools/)
 
-2.  **Clone the Repository:**
-    You need to clone this project repository first.
+2.  **Klon Repositori:**
+    Anda perlu mengkloning repositori proyek ini terlebih dahulu.
     ```bash
     git clone https://github.com/MamangRust/example-monitoring-ratatui.git
     cd example-monitoring-ratatui
     ```
 
-3.  **Run the Application:**
-    Use Cargo, the Rust package manager, to build and run the project.
+3.  **Jalankan Aplikasi:**
+    Gunakan Cargo, manajer paket Rust, untuk membangun dan menjalankan proyek.
     ```bash
     cargo run
     ```
 
-The application will run in your terminal. You can navigate between tabs by pressing `Ctrl+S` (System), `Ctrl+D` (Docker), and `Ctrl+K` (Kubernetes). To exit the application, press `q`.
+Aplikasi akan berjalan di terminal Anda. Anda dapat menavigasi antar tab dengan menekan `Ctrl+S` (Sistem), `Ctrl+D` (Docker), dan `Ctrl+K` (Kubernetes). Untuk keluar dari aplikasi, tekan `q`.
 
 
 ## Demo
-![System Monitoring](./image/image_2.png)
+![Pemantauan Sistem](./image/image_2.png)
 ---
-![Docker Monitoring](./image/image_3.png)
+![Pemantauan Docker](./image/image_3.png)
